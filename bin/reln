@@ -5,8 +5,14 @@ use warnings;
 use App::RegexFileUtils;
 
 # PODNAME: reln
-# ABSTRACT: symlink with regex
+# ABSTRACT: (sym)link with regex
 # VERSION
+
+=head1 SEE ALSO
+
+L<App::RegexFileUtils>
+
+=cut
 
 App::RegexFileUtils->main($0, @ARGV);
 

@@ -8,5 +8,11 @@ use App::RegexFileUtils;
 # ABSTRACT: copy with regex
 # VERSION
 
+=head1 SEE ALSO
+
+L<App::RegexFileUtils>
+
+=cut
+
 App::RegexFileUtils->main($0, @ARGV);
 
