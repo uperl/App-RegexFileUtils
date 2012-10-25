@@ -81,6 +81,17 @@ The underlying fileutils command (rm, cp, ln, etc) will be called
 for each file operated on, which may be slow if many files match
 the regular expression provided.
 
+This was written a long time ago and the code isn't very modern.
+
+Directories with a training slash may be ambiguous with a regex, so
+if you want to use a path as a destination instead of a regex, be
+sure you do NOT include the trailing slash.  That is:
+
+ # use this:
+ % recp /^foo/ /usr/bin
+ # NOT this:
+ % recp /^foo/ /usr/bin/
+
 =head1 AUTHOR
 
 Graham Ollis <plicease@cpan.org>

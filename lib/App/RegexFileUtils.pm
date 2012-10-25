@@ -81,6 +81,15 @@ the regular expression provided.
 
 This was written a long time ago and the code isn't very modern.
 
+Directories with a training slash may be ambiguous with a regex, so
+if you want to use a path as a destination instead of a regex, be
+sure you do NOT include the trailing slash.  That is:
+
+ # use this:
+ % recp /^foo/ /usr/bin
+ # NOT this:
+ % recp /^foo/ /usr/bin/
+
 =cut
 
 sub main {
@@ -119,6 +128,7 @@ sub main {
   
   unless(defined $dest) {
     print STDERR "usage: $appname [options] [source files] /pattern/[substitution/]\n";
+    print STDERR "       $appname [options] /pattern/ /path/to/destination\n";
     print STDERR "\n";
     print STDERR "--recmd [command]      change the behavior of the tool\n";
     print STDERR "--verbose              print commands before they are executed\n";
