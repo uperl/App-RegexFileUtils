@@ -98,6 +98,7 @@ sub main {
   my $modifiers;
   my $modifiers_match = '';
   my $tr;
+  my $static_dest = 0;
   
   while(defined($args[0]) && $args[0] =~ /^-/) {
     my $arg = shift @args;
@@ -158,14 +159,6 @@ sub main {
     $no_dest = 1;
   }
   
-  my @files = @args;
-  
-  if(@files ==0) {
-    opendir(DIR, '.') || die "unable to opendir `.' $!";
-    @files = readdir(DIR);
-    closedir DIR;
-  }
-  
   if($dest =~ m!^(s|)/(.*)/(.*)/([ig]*)$!) {
     $re = $2;
     $sub = $3;
@@ -194,8 +187,28 @@ sub main {
     $modifiers_match = $3;
   }
   
+  elsif(-d $dest) {
+    my $src = pop @args;
+    if($src =~ m!^(m|)/(.*)/([i]*)$!) {
+      $static_dest = 1;
+      $re = $2;
+      $modifiers = $3;
+      $modifiers_match = $3;
+    } else {
+      die "source is not a regex";
+    }
+  }
+  
   else {
-    die "$dest did not match\n";
+    die "destination is not a directory or a regex";
+  }
+  
+  my @files = @args;
+  
+  if(@files ==0) {
+    opendir(DIR, '.') || die "unable to opendir `.' $!";
+    @files = readdir(DIR);
+    closedir DIR;
   }
   
   for(@files) {
@@ -207,9 +220,11 @@ sub main {
     my @cmd = ($mode, @options, $old);
     
     if(defined $tr) {
-      eval "\$new =~ tr/$tr/$sub/"
+      eval "\$new =~ tr/$tr/$sub/";
     } elsif(defined $sub) {
-      eval "\$new =~ s/$re/$sub/$modifiers"
+      eval "\$new =~ s/$re/$sub/$modifiers";
+    } elsif($static_dest) {
+      $new = $dest;
     } else {
       if($no_dest) {
         $new = '';
