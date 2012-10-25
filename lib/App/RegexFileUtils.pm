@@ -198,7 +198,9 @@ sub main {
     next unless /$re/ || defined $tr;
     my $old = $_;
     my $new = $old;
-  
+    
+    my @cmd = ($mode, @options, $old);
+    
     if(defined $tr) {
       eval "\$new =~ tr/$tr/$sub/"
     } elsif(defined $sub) {
@@ -210,20 +212,19 @@ sub main {
         $new = '.';
       }
     }
-  
-    my $cmd = "$mode @options \"$old\" \"$new\"";
-    print "% $cmd\n" if $verbose;
-  
-    my $pid;
-    if(($pid = fork()) == 0) {
-      exec($cmd);
+    
+    push @cmd, $new unless $no_dest;
+    print "% @cmd\n" if $verbose;
+    system @cmd;
+
+    if ($? == -1) {
+      print STDERR "failed to execute: $!\n";
+      exit 2;
+    } elsif ($? & 127) {
+      print STDERR "child died with signal ", $? & 127, "\n";
+    } elsif($? >> 8) {
+      print "child exited with value ", $? >> 8, "\n";
     }
-  
-    unless(defined $pid) {
-      print STDERR "error in fork() $!";
-    }
-  
-    wait;
   }
 }
 
