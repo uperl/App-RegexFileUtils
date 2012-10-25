@@ -1,3 +1,5 @@
+=pod
+
 =head1 NAME
 
 App::RegexFileUtils - use regexes with file utils like rm, cp, mv, ln
@@ -5,6 +7,79 @@ App::RegexFileUtils - use regexes with file utils like rm, cp, mv, ln
 =head1 VERSION
 
 version 0.01
+
+=head1 SYNOPSIS
+
+Remove all files with a .bak extension:
+
+ % rerm '/\.bak$/'
+
+Change the extension of all files from .jpeg or .JPG (any case) to .jpg
+
+ % remv '/\.jpe?g$/.jpg/i'
+
+Copy all Perl files to a different directory:
+
+ % recp '/\.p[lm]$/' /perl/lib
+
+Create symlinks to .so files so that the symlinks lack a version number
+
+ % reln -s '/\.so\..*$/.so/'
+
+=head1 DESCRIPTION
+
+This distribution provides a version of C<rm>, C<cp>, C<mv> and C<ln> with a I<re> 
+(as in regular expression) prefix where the file sources can be specified as a regular
+expression, or the file source and destination can be specified as a regular expression 
+substitution Perl style.  The functionality that this provides can be duplicated with 
+shell syntax (typically for loops), but I find these scripts require less typing and 
+work regardless of the shell you are using.
+
+The scripts in this distribution do not remove, copy, move or link files directly, 
+instead they call the real C<rm>, C<cp>, C<mv> and C<ln> programs provided by your
+operating system.  You can therefore use any options that they support, for example
+the C<-i> option will allow you to interactively delete files:
+
+ % rerm -i '/\.bak$/'
+
+=head1 OPTIONS
+
+In addition to any options supported by the underlying operating system, these scripts
+will recognize the following options (and NOT pass them to the underlying system utilities).
+They are prefixed with C<--re> so that they do not interfear with any "real" options.
+
+=head2 --recmd command
+
+Specifies the command to execute.  This is usually determined by Perl's $0 variable.
+
+=head2 --reverbose
+
+Print out the system commands that are actually executed.
+
+=head2 --reall
+
+Include even hidden dot files, like C<.profile> and C<.login>.
+
+=head1 METHODS
+
+These commands can also be invoked from your Perl script, using this module:
+
+=head2 App::RegexFileUtils->main( $program, @arguments )
+
+For example:
+
+ use App::RegexFileUtils;
+ App::RegexFileUtils->main( 'rm', '/\.bak$/' );
+
+=head1 CAVEATS
+
+You will need to enclose many regular expressions in single
+quotes '' on the command line as many regular expression characters
+have special meanings in shells.
+
+The underlying fileutils command (rm, cp, ln, etc) will be called
+for each file operated on, which may be slow if many files match
+the regular expression provided.
 
 =head1 AUTHOR
 
