@@ -79,6 +79,8 @@ The underlying fileutils command (rm, cp, ln, etc) will be called
 for each file operated on, which may be slow if many files match
 the regular expression provided.
 
+This was written a long time ago and the code isn't very modern.
+
 =cut
 
 sub main {
@@ -93,7 +95,8 @@ sub main {
   my $do_hidden = 0;
   my $re;
   my $sub;
-  my $regulations;
+  my $modifiers;
+  my $modifiers_match = '';
   my $tr;
   
   while(defined($args[0]) && $args[0] =~ /^-/) {
@@ -166,7 +169,8 @@ sub main {
   if($dest =~ m!^(s|)/(.*)/(.*)/([ig]*)$!) {
     $re = $2;
     $sub = $3;
-    $regulations = $4;
+    $modifiers = $4;
+    $modifiers_match = 'i' if $modifiers =~ /i/;
   
     if($no_dest) {
       print STDERR "substitution `$mode' doesn't make sense\n";
@@ -186,7 +190,8 @@ sub main {
   
   elsif($dest =~ m!^(m|)/(.*)/([i]*)$!) {
     $re = $2;
-    $regulations = $3;
+    $modifiers = $3;
+    $modifiers_match = $3;
   }
   
   else {
@@ -195,7 +200,7 @@ sub main {
   
   for(@files) {
     next if /^\./ && !$do_hidden;
-    next unless /$re/ || defined $tr;
+    next unless eval "/$re/$modifiers_match" || defined $tr;
     my $old = $_;
     my $new = $old;
     
@@ -204,7 +209,7 @@ sub main {
     if(defined $tr) {
       eval "\$new =~ tr/$tr/$sub/"
     } elsif(defined $sub) {
-      eval "\$new =~ s/$re/$sub/$regulations"
+      eval "\$new =~ s/$re/$sub/$modifiers"
     } else {
       if($no_dest) {
         $new = '';
