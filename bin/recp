@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use App::RegexFileUtils;
+
+# PODNAME: recp
+# ABSTRACT: copy with regex
+# VERSION
+
+App::RegexFileUtils->main($0, @ARGV);
+
