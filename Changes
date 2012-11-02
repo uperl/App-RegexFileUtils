@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Add support for MSWin32 (still need to install GNU FileUtils first)
 
 0.02      2012-10-25 15:25:42 America/New_York
   - Add tests fix bugs.

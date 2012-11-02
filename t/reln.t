@@ -1,11 +1,23 @@
 use strict;
 use warnings;
-use Test::More tests => 9;
+use Test::More;
 use File::Temp qw( tempdir );
 use App::RegexFileUtils;
+use File::Spec;
 
 my $dir = tempdir( CLEANUP => 1);
+
 chdir($dir) || die;
+
+do {
+  open(my $fh, '>', 'foo');
+  close $fh;
+  eval { symlink 'foo', 'bar' };
+  if($@)
+  { chdir(File::Spec->updir); plan skip_all => 'Test requires symlink' }
+  else
+  { plan tests => 9 }
+};
 
 ok -d $dir, "dir = $dir";
 
@@ -23,4 +35,4 @@ ok -l 'libbar.so', 'is symlink libbar.so';
 is readlink('libfoo.so'), 'libfoo.so.1.2.3', 'libfoo.so => libfoo.so.1.2.3';
 is readlink('libbar.so'), 'libbar.so.1.2',   'libbar.so => libbar.so.1.2';
 
-chdir() || die;
+chdir(File::Spec->updir) || die;
