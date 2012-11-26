@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.04      2012-11-26 11:34:01 America/New_York
   - Makefile.PL to fail when cannot find cp mv rm
   - skip ln test if cannot find ln
 
