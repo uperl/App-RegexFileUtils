@@ -9,6 +9,27 @@ my $dir = tempdir( CLEANUP => 1);
 
 chdir($dir) || die;
 
+my $found_ln = 0;
+my $sep = $^O eq 'MSWin32' ? ';' : ':';
+my $ext = $^O =~ /^(MSWin32|cygwin)$/ ? '.exe' : '';
+foreach my $path (split $sep, $ENV{PATH})
+{
+  my $maybe = File::Spec->catfile($path, "ln$ext");
+  #diag $maybe;
+  #diag "x : ", -x $maybe;
+  if(-x $maybe)
+  {
+    $found_ln = 1;
+    last;
+  }
+}
+
+unless($found_ln)
+{
+  chdir(File::Spec->updir);
+  plan skip_all => "Test requires ln$ext";
+}
+
 do {
   open(my $fh, '>', 'foo');
   close $fh;
