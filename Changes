@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - rm dist build dep on [Dist::Zilla::Plugin::MakeMaker::Custom]
 
 0.04      2012-11-26 11:34:01 America/New_York
   - Makefile.PL to fail when cannot find cp mv rm
