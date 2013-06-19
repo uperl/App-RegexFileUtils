@@ -3,6 +3,7 @@ use warnings;
 use Test::More tests => 11;
 use File::Temp qw( tempdir );
 use App::RegexFileUtils;
+use File::Spec;
 
 my $dir = tempdir( CLEANUP => 1);
 chdir($dir) || die;
@@ -23,4 +24,4 @@ ok -e $_, "orig $_" for @orig;
 ok -e "perl/lib/foo.pl", "perl/lib/foo.pl";
 ok -e "perl/lib/Foo.pm", "perl/lib/Foo.pm";
 
-chdir() || die;
+chdir(File::Spec->updir) || die;

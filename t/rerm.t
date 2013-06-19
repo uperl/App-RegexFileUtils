@@ -3,6 +3,7 @@ use warnings;
 use Test::More tests => 17;
 use File::Temp qw( tempdir );
 use App::RegexFileUtils;
+use File::Spec;
 
 my $dir = tempdir( CLEANUP => 1);
 chdir($dir) || die;
@@ -32,4 +33,4 @@ ok ! -e 'test.txt.bak', 'test.txt.bak';
 ok -e 'nerf.c', 'nerf.c';
 ok ! -e 'nerf.c.bak', 'nerf.c.bak';
 
-chdir() || die;
+chdir(File::Spec->updir) || die;

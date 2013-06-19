@@ -3,6 +3,7 @@ use warnings;
 use Test::More tests => 11;
 use File::Temp qw( tempdir );
 use App::RegexFileUtils;
+use File::Spec;
 
 my $dir = tempdir( CLEANUP => 1);
 chdir($dir) || die;
@@ -19,4 +20,4 @@ App::RegexFileUtils->main('mv', '/\.jpe?g/.jpg/i');
 
 ok -e "foo0$_.jpg", "after foo0$_.jpg" for (1..5);
 
-chdir() || die;
+chdir(File::Spec->updir) || die;

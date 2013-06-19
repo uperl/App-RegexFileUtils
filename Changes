@@ -2,6 +2,19 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.05      2013-05-31 07:03:59 America/New_York
+  - promote to production
+
+0.04_01   2013-05-29 21:11:34 America/New_York
+  - rm dist build dep on [Dist::Zilla::Plugin::MakeMaker::Custom]
+
+0.04      2012-11-26 11:34:01 America/New_York
+  - Makefile.PL to fail when cannot find cp mv rm
+  - skip ln test if cannot find ln
+
+0.03      2012-11-02 13:54:06 America/New_York
+  - Add support for MSWin32 (still need to install GNU FileUtils first)
+
 0.02      2012-10-25 15:25:42 America/New_York
   - Add tests fix bugs.
 
