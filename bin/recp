@@ -4,9 +4,7 @@ use strict;
 use warnings;
 use App::RegexFileUtils;
 
-# PODNAME: recp
 # ABSTRACT: copy with regex
-# VERSION
 
 =head1 SEE ALSO
 

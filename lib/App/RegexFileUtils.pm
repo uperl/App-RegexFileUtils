@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 # ABSTRACT: use regexes with file utils like rm, cp, mv, ln
-# VERSION
 
 =head1 SYNOPSIS
 

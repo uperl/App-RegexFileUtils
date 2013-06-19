@@ -4,9 +4,7 @@ use strict;
 use warnings;
 use App::RegexFileUtils;
 
-# PODNAME: retouch
 # ABSTRACT: touch with regex
-# VERSION
 
 =head1 SEE ALSO
 

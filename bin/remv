@@ -4,9 +4,7 @@ use strict;
 use warnings;
 use App::RegexFileUtils;
 
-# PODNAME: remv
 # ABSTRACT: move with regex
-# VERSION
 
 =head1 SEE ALSO
 
