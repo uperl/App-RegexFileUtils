@@ -5,6 +5,16 @@ use File::Temp qw( tempdir );
 use App::RegexFileUtils;
 use File::Spec;
 
+BEGIN {
+  eval q{
+    use Capture::Tiny qw( capture );
+    1;
+  } // eval q{
+    sub capture { $_[0]->() }
+  };
+  die $@ if $@;
+}
+
 my $dir = tempdir( CLEANUP => 1);
 chdir($dir) || die;
 
@@ -16,7 +26,7 @@ for (@orig)
 
 ok -e $_, "orig $_" for @orig;
 
-App::RegexFileUtils->main('mv', '/\.jpe?g/.jpg/i');
+capture sub { App::RegexFileUtils->main('mv', '/\.jpe?g/.jpg/i') };
 
 ok -e "foo0$_.jpg", "after foo0$_.jpg" for (1..5);
 
