@@ -19,6 +19,15 @@ pod_spelling_system:
     - recmd
     - reverbose
     - utils
+    - OpenBSD
+    - MERCHANTABILITY
+    - YY
+    - acfm
+    - timestamps
+    - Schumack
+    - schumacks
+    - fiv
+    - cwest
 
 pod_coverage:
   # format is "Class#method" or "Class", regex allowed

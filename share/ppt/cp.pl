@@ -330,7 +330,7 @@ B<-f> Force copy if possible (DEFAULT)
 
 B<-i> Prompt for confirmation whenever the copy would overwrite an existing target.
 
-B<-p> Preserve source file attributes (like modDate) as much as possible onto the target.
+B<-p> Preserve source file attributes (like modification date) as much as possible onto the target.
 
 B<-v> Verbose. Echo "cp source target" before copy is done.
 

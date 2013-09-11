@@ -156,8 +156,8 @@ I<touch> sets the access and modification timestamps of files. By default,
 both the access and modification times are set to the current time.
 If necessary, files will be created.
 
-I<touch> exits succesfully if and only if all timestamps could be set
-succesfully.
+I<touch> exits successfully if and only if all timestamps could be set
+successfully.
 
 =head2 OPTIONS
 
@@ -177,7 +177,7 @@ not influence the exit status.
 
 =item -f
 
-This option is ignored, and only recognized for compatability reasons.
+This option is ignored, and only recognized for compatibility reasons.
 
 =item -m
 
