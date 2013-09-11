@@ -1,14 +1,16 @@
 use strict;
 use warnings;
-use Test::More tests => 3;
+use Test::More tests => 4;
 use File::Temp qw( tempdir );
 
 my @cmds;
+my $error;
 BEGIN {
   *CORE::GLOBAL::system = sub {
     push @cmds, \@_;
     note "% @_";
     CORE::system(@_);
+    $error = $?;
   };
 }
 
@@ -36,5 +38,7 @@ ok 'didn\'t die';
 is_deeply \@cmds,
   [ [ 'touch', 'bar.txt' ], [ 'touch', 'foo.txt' ] ],
   "touch bar.txt ; touch foo.txt ";
+
+is $error, 0, '$? == 0';
 
 chdir(File::Spec->updir) || die;
