@@ -1,5 +1,8 @@
 package App::RegexFileUtils::MSWin32;
 
+# ABSTRACT: MSWin32 specific code for App::RegexFileUtils
+# VERSION
+
 package
   App::RegexFileUtils;
 
@@ -9,9 +12,6 @@ use File::ShareDir qw( dist_dir );
 use File::Basename qw( dirname );
 use File::Spec;
 
-# ABSTRACT: MSWin32 specific code for App::RegexFileUtils
-# VERSION
-
 warn "only needed on MSWin32" unless $^O eq 'MSWin32';
 
 my $path;
@@ -20,7 +20,7 @@ sub share_dir
 {
   unless(defined $path)
   {
-    if(defined $App::RegexFileUtils::MSWin32::VERSION && $INC{'App/RegexFileUtils/MSWin32.pm'} =~ /blib/)
+    if(defined $App::RegexFileUtils::MSWin32::VERSION && __FILE__ =~ /blib/)
     {
       $path = File::Spec->catdir(
         dirname(__FILE__), 
