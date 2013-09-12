@@ -2,6 +2,10 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.05_02   2013-09-12 06:28:57 -0400
+  - experimental: include my own mv verson for MSWin32 along
+    with the ppt programs
+
 0.05_01   2013-09-11 21:49:56 -0400
   - experimental: package ppt versions of ln, cp, rm, touch
     for use on MSWin32 where GNU File/Coreutils (or equivalent)
