@@ -1,5 +1,8 @@
 package App::RegexFileUtils::MSWin32;
 
+package
+  App::RegexFileUtils;
+
 use strict;
 use warnings;
 use File::ShareDir qw( dist_dir );
@@ -13,7 +16,7 @@ warn "only needed on MSWin32" unless $^O eq 'MSWin32';
 
 my $path;
 
-sub App::RegexFileUtils::share_dir
+sub share_dir
 {
   unless(defined $path)
   {
@@ -53,6 +56,22 @@ sub App::RegexFileUtils::share_dir
   }
   
   $path;
+}
+
+sub fix_path
+{
+  my($class, $cmd) = @_;
+
+  foreach my $path (split /;/, $ENV{PATH})
+  {
+    return if -x File::Spec->catfile($path, $cmd->[0] . '.exe');
+  }
+
+  $cmd->[0] = File::Spec->catfile(
+    App::RegexFileUtils->share_dir,
+    'ppt', $cmd->[0] . '.pl',
+  );
+  unshift @$cmd, $^X;
 }
 
 1;
