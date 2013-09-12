@@ -2,9 +2,10 @@ package inc::MakeMaker;
 
 use Moose;
 use namespace::autoclean;
-use v5.10;
 
 with 'Dist::Zilla::Role::InstallTool';
+
+my $checks;
 
 sub setup_installer
 {
@@ -14,7 +15,6 @@ sub setup_installer
   
   my $content = $makefile->content;
   
-  state $checks;
   unless($checks)
   {
     $checks = do { local $/; <DATA> };
@@ -55,7 +55,9 @@ foreach my $program (qw( mv cp rm ))
   warn "not found: $program" unless $found{$program};
 }
 
-$found{cp} = $found{rm} = 1 if $^O eq 'MSWin32';
+# On Windows we use ppt implementation of some of these
+# if they are not found i nthe path.
+$found{cp} = $found{rm} = $found{mv} = $found{touch} = 1 if $^O eq 'MSWin32';
 
 unless($found{mv} && $found{cp} && $found{rm})
 {

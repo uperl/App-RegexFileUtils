@@ -9,7 +9,7 @@ BEGIN {
   eval q{
     use Capture::Tiny qw( capture );
     1;
-  } // eval q{
+  } || eval q{
     sub capture { $_[0]->() }
   };
   die $@ if $@;
