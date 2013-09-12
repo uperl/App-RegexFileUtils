@@ -2,6 +2,12 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.05_01   2013-09-11 21:49:56 -0400
+  - experimental: package ppt versions of ln, cp, rm, touch
+    for use on MSWin32 where GNU File/Coreutils (or equivalent)
+    are not usually installed.  (mv is missing so I will have
+    to write that one myself)
+
 0.05      2013-05-31 07:03:59 America/New_York
   - promote to production
 
