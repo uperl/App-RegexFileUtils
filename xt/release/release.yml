@@ -28,8 +28,10 @@ pod_spelling_system:
     - schumacks
     - fiv
     - cwest
+    - MSWin
 
 pod_coverage:
   # format is "Class#method" or "Class", regex allowed
   # for either Class or method.
-  private: []
+  private:
+    - App::RegexFileUtils::MSWin32#.*

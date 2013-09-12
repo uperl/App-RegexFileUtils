@@ -9,7 +9,7 @@ use File::Spec;
 # ABSTRACT: MSWin32 specific code for App::RegexFileUtils
 # VERSION
 
-die "only needed on MSWin32" unless $^O eq 'MSWin32';
+warn "only needed on MSWin32" unless $^O eq 'MSWin32';
 
 my $path;
 
