@@ -4,7 +4,7 @@ use regexes with file utils like rm, cp, mv, ln
 
 # VERSION
 
-version 0.05\_02
+version 0.05\_03
 
 # SYNOPSIS
 

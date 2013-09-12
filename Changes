@@ -2,7 +2,7 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
-0.05_02   2013-09-12 06:28:57 -0400
+0.05_03   2013-09-12 06:29:54 -0400
   - experimental: include my own mv verson for MSWin32 along
     with the ppt programs
 
