@@ -2,9 +2,10 @@ package inc::MakeMaker;
 
 use Moose;
 use namespace::autoclean;
-use v5.10;
 
 with 'Dist::Zilla::Role::InstallTool';
+
+my $checks;
 
 sub setup_installer
 {
@@ -14,7 +15,6 @@ sub setup_installer
   
   my $content = $makefile->content;
   
-  state $checks;
   unless($checks)
   {
     $checks = do { local $/; <DATA> };
