@@ -35,8 +35,17 @@ ok 'didn\'t die';
 # commands could come in any order
 @cmds = sort { $a->[1] cmp $b->[1] } @cmds;
 
-is_deeply \@cmds,
-  [ [ 'touch', 'bar.txt' ], [ 'touch', 'foo.txt' ] ],
+my @expected = ( [ 'touch', 'bar.txt' ], [ 'touch', 'foo.txt' ] );
+
+if($^O eq 'MSWin32')
+{
+  unshift @{ $expected[0] }, $^X;
+  unshift @{ $expected[1] }, $^X;
+  $expected[0]->[1] = File::Spec->catfile(App::RegexFileUtils->share_dir, qw( ppt touch.pl ));
+  $expected[1]->[1] = File::Spec->catfile(App::RegexFileUtils->share_dir, qw( ppt touch.pl ));
+}
+
+is_deeply \@cmds, \@expected,
   "touch bar.txt ; touch foo.txt ";
 
 is $error, 0, '$? == 0';

@@ -142,6 +142,13 @@ provided you do not restrict others to do the same.
 
 =cut
 
+BEGIN {
+  if($^O eq 'MSWin32')
+  {
+    require App::RegexFileUtils::MSWin32;
+  }
+}
+
 sub main {
   my $class = shift;
   my $mode = shift;
@@ -295,6 +302,17 @@ sub main {
     
     push @cmd, $new unless $no_dest;
     print "% @cmd\n" if $verbose;
+    
+    if($^O eq 'MSWin32')
+    {
+      require File::Spec;
+      $cmd[0] = File::Spec->catfile(
+        __PACKAGE__->share_dir,
+        'ppt', "$cmd[0].pl",
+      );
+      unshift @cmd, $^X;
+    }
+    
     system @cmd;
 
     if ($? == -1) {

@@ -55,6 +55,8 @@ foreach my $program (qw( mv cp rm ))
   warn "not found: $program" unless $found{$program};
 }
 
+$found{cp} = $found{rm} = 1 if $^O eq 'MSWin32';
+
 unless($found{mv} && $found{cp} && $found{rm})
 {
   warn "this distribution requires GNU Coreutils (mv, cp, rm and ln), or equivalent";
