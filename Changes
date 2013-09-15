@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.05_05   2013-09-14 21:27:53 -0400
+  - fix logic in t/retouch.t for when MSWin32 DOES have touch.exe
+
 0.05_04   2013-09-12 12:14:39 -0400
   - Prefer .exe in path over ppt version on MSWin32
 
