@@ -39,10 +39,17 @@ my @expected = ( [ 'touch', 'bar.txt' ], [ 'touch', 'foo.txt' ] );
 
 if($^O eq 'MSWin32')
 {
-  unshift @{ $expected[0] }, $^X;
-  unshift @{ $expected[1] }, $^X;
-  $expected[0]->[1] = File::Spec->catfile(App::RegexFileUtils->share_dir, qw( ppt touch.pl ));
-  $expected[1]->[1] = File::Spec->catfile(App::RegexFileUtils->share_dir, qw( ppt touch.pl ));
+  (sub {
+    foreach my $path (split /;/, $ENV{PATH})
+    {
+      return if -x File::Spec->catfile('touch.exe');
+    }
+
+    unshift @{ $expected[0] }, $^X;
+    unshift @{ $expected[1] }, $^X;
+    $expected[0]->[1] = File::Spec->catfile(App::RegexFileUtils->share_dir, qw( ppt touch.pl ));
+    $expected[1]->[1] = File::Spec->catfile(App::RegexFileUtils->share_dir, qw( ppt touch.pl ));
+  })->();
 }
 
 is_deeply \@cmds, \@expected,
