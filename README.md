@@ -2,10 +2,6 @@
 
 use regexes with file utils like rm, cp, mv, ln
 
-# VERSION
-
-version 0.05\_05
-
 # SYNOPSIS
 
 Remove all files with a .bak extension:
