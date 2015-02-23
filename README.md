@@ -42,15 +42,15 @@ In addition to any options supported by the underlying operating system, these s
 will recognize the following options (and NOT pass them to the underlying system utilities).
 They are prefixed with `--re` so that they do not interfear with any "real" options.
 
-## \--recmd command
+## --recmd command
 
 Specifies the command to execute.  This is usually determined by Perl's $0 variable.
 
-## \--reverbose
+## --reverbose
 
 Print out the system commands that are actually executed.
 
-## \--reall
+## --reall
 
 Include even hidden dot files, like `.profile` and `.login`.
 
