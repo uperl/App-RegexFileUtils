@@ -36,7 +36,7 @@ sub setup_installer
 __DATA__
 
 my $sep = $^O eq 'MSWin32' ? ';' : ':';
-my $ext = $^O =~ /^(MSWin32|cygwin)$/ ? '.exe' : '';
+my $ext = $^O =~ /^(MSWin32|cygwin|msys)$/ ? '.exe' : '';
 my %found;
 foreach my $path (split $sep, $ENV{PATH})
 {

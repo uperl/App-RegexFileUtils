@@ -11,7 +11,7 @@ chdir($dir) || die;
 
 my $found_ln = 0;
 my $sep = $^O eq 'MSWin32' ? ';' : ':';
-my $ext = $^O =~ /^(MSWin32|cygwin)$/ ? '.exe' : '';
+my $ext = $^O =~ /^(MSWin32|cygwin|msys)$/ ? '.exe' : '';
 foreach my $path (split $sep, $ENV{PATH})
 {
   my $maybe = File::Spec->catfile($path, "ln$ext");
@@ -28,6 +28,11 @@ unless($found_ln)
 {
   chdir(File::Spec->updir);
   plan skip_all => "Test requires ln$ext";
+}
+
+if($^O eq 'msys')
+{
+  plan skip_all => "MSYS2 does not have real symlinks";
 }
 
 do {

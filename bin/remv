@@ -5,6 +5,8 @@ use warnings;
 use App::RegexFileUtils;
 
 # ABSTRACT: move with regex
+# PODNAME: remv
+# VERSION
 
 =head1 SEE ALSO
 

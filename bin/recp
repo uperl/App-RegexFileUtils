@@ -5,6 +5,8 @@ use warnings;
 use App::RegexFileUtils;
 
 # ABSTRACT: copy with regex
+# PODNAME: recp
+# VERSION
 
 =head1 SEE ALSO
 

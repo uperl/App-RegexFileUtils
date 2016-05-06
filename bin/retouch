@@ -5,6 +5,8 @@ use warnings;
 use App::RegexFileUtils;
 
 # ABSTRACT: touch with regex
+# PODNAME: retouch
+# VERSION
 
 =head1 SEE ALSO
 

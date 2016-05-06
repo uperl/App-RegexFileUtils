@@ -5,6 +5,8 @@ use warnings;
 use App::RegexFileUtils;
 
 # ABSTRACT: remove with regex
+# PODNAME: rerm
+# VERSION
 
 =head1 SEE ALSO
 

@@ -5,6 +5,8 @@ use warnings;
 use App::RegexFileUtils;
 
 # ABSTRACT: (sym)link with regex
+# PODNAME: reln
+# VERSION
 
 =head1 SEE ALSO
 
