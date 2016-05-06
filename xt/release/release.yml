@@ -7,7 +7,6 @@ pod_spelling_system:
     - reln
     - recp
     - rerm
-    - interfear
     - JPG
     - bak
     - cp
@@ -19,16 +18,15 @@ pod_spelling_system:
     - recmd
     - reverbose
     - utils
-    - OpenBSD
     - MERCHANTABILITY
     - YY
     - acfm
-    - timestamps
     - Schumack
     - schumacks
     - fiv
     - cwest
     - MSWin
+    - sym
 
 pod_coverage:
   # format is "Class#method" or "Class", regex allowed

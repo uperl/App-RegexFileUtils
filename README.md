@@ -40,7 +40,7 @@ the `-i` option will allow you to interactively delete files:
 
 In addition to any options supported by the underlying operating system, these scripts
 will recognize the following options (and NOT pass them to the underlying system utilities).
-They are prefixed with `--re` so that they do not interfear with any "real" options.
+They are prefixed with `--re` so that they do not interfere with any "real" options.
 
 ## --recmd command
 
