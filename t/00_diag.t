@@ -11,11 +11,14 @@ my $post_diag;
 
 $modules{$_} = $_ for qw(
   ExtUtils::MakeMaker
-  File::ShareDir
+  File::ShareDir::Dist
   File::ShareDir::Install
 );
 
-
+$post_diag = sub {
+  require App::RegexFileUtils;
+  diag 'share_dir = ', App::RegexFileUtils->_share_dir;
+};
 
 my @modules = sort keys %modules;
 

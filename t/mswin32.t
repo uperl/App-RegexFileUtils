@@ -3,7 +3,6 @@ use warnings;
 use Test::More;
 BEGIN { plan skip_all => 'only test on MSWin32' if $^O ne 'MSWin32' }
 use App::RegexFileUtils;
-use App::RegexFileUtils::MSWin32;
 plan tests => 5;
 
 my $dir = App::RegexFileUtils->share_dir;

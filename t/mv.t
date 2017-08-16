@@ -4,7 +4,6 @@ use Test::More;
 use Test::More;
 BEGIN { plan skip_all => 'only test on MSWin32' if $^O ne 'MSWin32' }
 use App::RegexFileUtils;
-use App::RegexFileUtils::MSWin32;
 use File::Temp qw( tempdir );
 use File::Spec;
 plan tests => 15;

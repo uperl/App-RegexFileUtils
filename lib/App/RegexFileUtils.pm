@@ -2,6 +2,10 @@ package App::RegexFileUtils;
 
 use strict;
 use warnings;
+use 5.010;
+use File::Spec;
+use File::Basename qw( dirname );
+use File::ShareDir::Dist qw( dist_share );
 
 # ABSTRACT: use regexes with file utils like rm, cp, mv, ln
 # VERSION
@@ -141,13 +145,6 @@ and sell this program (and any modified variants) in any way you wish,
 provided you do not restrict others to do the same.
 
 =cut
-
-BEGIN {
-  if($^O eq 'MSWin32')
-  {
-    require App::RegexFileUtils::MSWin32;
-  }
-}
 
 sub main {
   my $class = shift;
@@ -303,7 +300,7 @@ sub main {
     push @cmd, $new unless $no_dest;
     print "% @cmd\n" if $verbose;
     
-    __PACKAGE__->fix_path(\@cmd) if $^O eq 'MSWin32';
+    __PACKAGE__->_fix_path(\@cmd);
     
     system @cmd;
 
@@ -316,6 +313,37 @@ sub main {
       print "child exited with value ", $? >> 8, "\n";
     }
   }
+}
+
+sub _share_dir
+{
+  state $path;
+  
+  unless(defined $path)
+  {
+    $path = dist_share('App-RegexFileUtils');
+    die 'can not find share directory' unless $path && -d "$path/ppt";    
+  }
+  
+  $path;
+};
+
+sub _fix_path
+{
+  my($class, $cmd) = @_;
+
+  return unless $^O eq 'MSWin32';
+
+  foreach my $path (split /;/, $ENV{PATH})
+  {
+    return if -x File::Spec->catfile($path, $cmd->[0] . '.exe');
+  }
+
+  $cmd->[0] = File::Spec->catfile(
+    App::RegexFileUtils->_share_dir,
+    'ppt', $cmd->[0] . '.pl',
+  );
+  unshift @$cmd, $^X;
 }
 
 1;
