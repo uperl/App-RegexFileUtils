@@ -13,6 +13,8 @@ $modules{$_} = $_ for qw(
   ExtUtils::MakeMaker
   File::ShareDir::Dist
   File::ShareDir::Install
+  File::Which
+  Test::More
 );
 
 $post_diag = sub {

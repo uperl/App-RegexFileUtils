@@ -3,8 +3,8 @@ package App::RegexFileUtils;
 use strict;
 use warnings;
 use File::Spec;
-use File::Basename qw( dirname );
 use File::ShareDir::Dist qw( dist_share );
+use File::Which qw( which );
 
 # ABSTRACT: use regexes with file utils like rm, cp, mv, ln
 # VERSION
@@ -327,10 +327,7 @@ sub _fix_path
 
   return unless $^O eq 'MSWin32';
 
-  foreach my $path (split /;/, $ENV{PATH})
-  {
-    return if -x File::Spec->catfile($path, $cmd->[0] . '.exe');
-  }
+  return if which($cmd->[0]);
 
   $cmd->[0] = File::Spec->catfile(
     App::RegexFileUtils->_share_dir,
