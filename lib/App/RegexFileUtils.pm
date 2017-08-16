@@ -96,10 +96,10 @@ sure you do NOT include the trailing slash.  That is:
 =head1 BUNDLED FILES
 
 This distribution comes bundled with C<cp>, C<ln>, C<rm>, C<touch>
-from the old L<Perl Power Tools|https://metacpan.org/release/ppt> project.
-These are only used on C<MSWin32> if these commands are not found in
-the path as they are frequently not available on that platform.  They
-are individually licensed separately.
+from the L<Perl Power Tools|https://metacpan.org/release/ppt> project.
+These are only used if the operating system does not provide these
+commands.  This is normally only the case on Windows.  They are individually
+licensed separately.
 
 =head2 cp.pl
 
