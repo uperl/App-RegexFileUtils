@@ -58,7 +58,9 @@ Include even hidden dot files, like `.profile` and `.login`.
 
 These commands can also be invoked from your Perl script, using this module:
 
-## App::RegexFileUtils->main( $program, @arguments )
+## main
+
+    App::RegexFileUtils->main( $program, @arguments )
 
 For example:
 

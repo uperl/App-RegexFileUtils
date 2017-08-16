@@ -65,7 +65,9 @@ Include even hidden dot files, like C<.profile> and C<.login>.
 
 These commands can also be invoked from your Perl script, using this module:
 
-=head2 App::RegexFileUtils->main( $program, @arguments )
+=head2 main
+
+ App::RegexFileUtils->main( $program, @arguments )
 
 For example:
 
