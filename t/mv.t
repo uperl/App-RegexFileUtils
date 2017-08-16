@@ -1,12 +1,9 @@
-use strict;
-use warnings;
-use Test::More;
-use Test::More;
-BEGIN { plan skip_all => 'only test on MSWin32' if $^O ne 'MSWin32' }
+use Test2::V0 -no_srand => 1;
 use App::RegexFileUtils;
 use File::Temp qw( tempdir );
 use File::Spec;
-plan tests => 15;
+
+skip_all 'only test on MSWin32' unless $^O eq 'MSWin32';
 
 my $dir = tempdir( CLEANUP => 1 );
 
@@ -44,3 +41,5 @@ ok ! -e File::Spec->catfile($dir, 'A02.txt'), "A02";
 ok ! -e File::Spec->catfile($dir, 'A03.txt'), "A03";
 ok -e File::Spec->catfile($dir, 'subdir', 'A02.txt'), "A02";
 ok -e File::Spec->catfile($dir, 'subdir', 'A03.txt'), "A03";
+
+done_testing;
