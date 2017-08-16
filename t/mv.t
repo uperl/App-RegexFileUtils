@@ -18,8 +18,8 @@ mkdir $subdir;
 
 ok -d $subdir, "subdir = $subdir";
 
-my $mv    = File::Spec->catfile(App::RegexFileUtils->share_dir, 'ppt', 'mv.pl');
-my $touch = File::Spec->catfile(App::RegexFileUtils->share_dir, 'ppt', 'touch.pl');
+my $mv    = File::Spec->catfile(App::RegexFileUtils->_share_dir, 'ppt', 'mv.pl');
+my $touch = File::Spec->catfile(App::RegexFileUtils->_share_dir, 'ppt', 'touch.pl');
 
 system $^X, $touch, File::Spec->catfile($dir, 'A01.txt');
 system $^X, $touch, File::Spec->catfile($dir, 'A02.txt');

@@ -5,7 +5,7 @@ BEGIN { plan skip_all => 'only test on MSWin32' if $^O ne 'MSWin32' }
 use App::RegexFileUtils;
 plan tests => 5;
 
-my $dir = App::RegexFileUtils->share_dir;
+my $dir = App::RegexFileUtils->_share_dir;
 ok -d $dir, "dir = $dir";
 
 foreach my $cmd (qw( cp rm touch mv ))

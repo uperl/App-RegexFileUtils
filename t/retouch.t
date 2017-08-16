@@ -41,8 +41,8 @@ if($^O eq 'MSWin32' && @{$cmds[0]} == 3)
 {
   unshift @{ $expected[0] }, $^X;
   unshift @{ $expected[1] }, $^X;
-  $expected[0]->[1] = File::Spec->catfile(App::RegexFileUtils->share_dir, qw( ppt touch.pl ));
-  $expected[1]->[1] = File::Spec->catfile(App::RegexFileUtils->share_dir, qw( ppt touch.pl ));
+  $expected[0]->[1] = File::Spec->catfile(App::RegexFileUtils->_share_dir, qw( ppt touch.pl ));
+  $expected[1]->[1] = File::Spec->catfile(App::RegexFileUtils->_share_dir, qw( ppt touch.pl ));
 }
 
 is_deeply \@cmds, \@expected,

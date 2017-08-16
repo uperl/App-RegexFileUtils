@@ -2,7 +2,6 @@ package App::RegexFileUtils;
 
 use strict;
 use warnings;
-use 5.010;
 use File::Spec;
 use File::Basename qw( dirname );
 use File::ShareDir::Dist qw( dist_share );
@@ -315,16 +314,10 @@ sub main {
   }
 }
 
-sub _share_dir
-{
-  state $path;
-  
-  unless(defined $path)
-  {
-    $path = dist_share('App-RegexFileUtils');
-    die 'can not find share directory' unless $path && -d "$path/ppt";    
-  }
-  
+use constant _share_dir => do {
+  my $path;
+  $path = dist_share('App-RegexFileUtils');
+  die 'can not find share directory' unless $path && -d "$path/ppt";    
   $path;
 };
 
