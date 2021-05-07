@@ -107,7 +107,7 @@ foreach my $file (@ARGV) {
          warn "failed to link $file to $this_target: $!";
 }
 
-    
+
 exit $warnings;
 
 __END__
@@ -145,7 +145,7 @@ Create symbolic links instead of hard links (the default).
 
 If the I<target> is not a directory, try to remove any existing
 I<target>s before creating the links. Failure of removing the
-target results in a warning and no further attempt to make the 
+target results in a warning and no further attempt to make the
 link will be made.
 
 =back
@@ -168,10 +168,10 @@ There are no known bugs in this implementation of B<ln>.
     $Log: ln,v $
     Revision 1.2  2004/08/05 14:17:43  cwest
     cleanup, new version number on website
-
+ 
     Revision 1.1  2004/07/23 20:10:07  cwest
     initial import
-
+ 
     Revision 1.1  1999/03/14 05:26:18  abigail
     Initial revision
 

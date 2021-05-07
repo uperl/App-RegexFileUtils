@@ -29,14 +29,14 @@ Create symlinks to .so files so that the symlinks lack a version number
 
 =head1 DESCRIPTION
 
-This distribution provides a version of C<rm>, C<cp>, C<mv> and C<ln> with a I<re> 
+This distribution provides a version of C<rm>, C<cp>, C<mv> and C<ln> with a I<re>
 (as in regular expression) prefix where the file sources can be specified as a regular
-expression, or the file source and destination can be specified as a regular expression 
-substitution Perl style.  The functionality that this provides can be duplicated with 
-shell syntax (typically for loops), but I find these scripts require less typing and 
+expression, or the file source and destination can be specified as a regular expression
+substitution Perl style.  The functionality that this provides can be duplicated with
+shell syntax (typically for loops), but I find these scripts require less typing and
 work regardless of the shell you are using.
 
-The scripts in this distribution do not remove, copy, move or link files directly, 
+The scripts in this distribution do not remove, copy, move or link files directly,
 instead they call the real C<rm>, C<cp>, C<mv> and C<ln> programs provided by your
 operating system.  You can therefore use any options that they support, for example
 the C<-i> option will allow you to interactively delete files:
@@ -153,7 +153,7 @@ sub main {
   my $appname = $mode;
   $mode =~ s!^.*/!!;
   my @args = @_;
-  
+
   my @options = ();
   my $verbose = 0;
   my $do_hidden = 0;
@@ -163,10 +163,10 @@ sub main {
   my $modifiers_match = '';
   my $tr;
   my $static_dest = 0;
-  
+
   while(defined($args[0]) && $args[0] =~ /^-/) {
     my $arg = shift @args;
-  
+
     if($arg =~ /^--recmd$/) {
       $mode = shift @args;
       $mode =~ s!^.*/!!;
@@ -178,9 +178,9 @@ sub main {
       push @options, $arg;
     }
   }
-  
+
   my $dest = pop @args;
-  
+
   unless(defined $dest) {
     print STDERR "usage: $appname [options] [source files] /pattern/[substitution/]\n";
     print STDERR "       $appname [options] /pattern/ /path/to/destination\n";
@@ -192,10 +192,10 @@ sub main {
     print STDERR "all other arguments are passed to the system tool\n";
     exit;
   }
-  
+
   my $orig_mode = $mode;
   $mode =~ s/^re//;
-  
+
   my %modes = (
     'mv'    => 'mv',
     'move'    => 'mv',
@@ -210,48 +210,48 @@ sub main {
     'unlink'  => 'rm',
     'touch'    => 'touch',
   );
-  
+
   unshift @options, '-s' if $mode eq 'symlink';
-  
+
   $mode = $modes{$mode};
   unless(defined $mode) {
     print STDERR "unknown mode $orig_mode\n";
     exit;
   }
-  
+
   my $no_dest = 0;
   if($mode eq 'touch' || $mode eq 'rm') {
     $no_dest = 1;
   }
-  
+
   if($dest =~ m!^(s|)/(.*)/(.*)/([ig]*)$!) {
     $re = $2;
     $sub = $3;
     $modifiers = $4;
     $modifiers_match = 'i' if $modifiers =~ /i/;
-  
+
     if($no_dest) {
       print STDERR "substitution `$mode' doesn't make sense\n";
       exit;
     }
-  
+
   }
-  
+
   elsif($dest =~ m!tr/(.*)/(.*)/$!) {
     $tr = $1;
     $sub = $2;
-  
+
     if($no_dest) {
       print STDERR "translation `$mode' doesn't make sense\n";
     }
   }
-  
+
   elsif($dest =~ m!^(m|)/(.*)/([i]*)$!) {
     $re = $2;
     $modifiers = $3;
     $modifiers_match = $3;
   }
-  
+
   elsif(-d $dest) {
     my $src = pop @args;
     if($src =~ m!^(m|)/(.*)/([i]*)$!) {
@@ -263,27 +263,27 @@ sub main {
       die "source is not a regex";
     }
   }
-  
+
   else {
     die "destination is not a directory or a regex";
   }
-  
+
   my @files = @args;
-  
+
   if(@files ==0) {
-    opendir(DIR, '.') || die "unable to opendir `.' $!";
+    opendir(DIR, '.') || die "unable to opendir `.' $!";  ## no critic (Freenode::BarewordFilehandles)
     @files = readdir(DIR);
     closedir DIR;
   }
-  
+
   for(@files) {
     next if /^\./ && !$do_hidden;
     next unless eval "/$re/$modifiers_match" || defined $tr;
     my $old = $_;
     my $new = $old;
-    
+
     my @cmd = ($mode, @options, $old);
-    
+
     if(defined $tr) {
       eval "\$new =~ tr/$tr/$sub/";
     } elsif(defined $sub) {
@@ -297,12 +297,12 @@ sub main {
         $new = '.';
       }
     }
-    
+
     push @cmd, $new unless $no_dest;
     print "% @cmd\n" if $verbose;
-    
+
     __PACKAGE__->_fix_path(\@cmd);
-    
+
     system @cmd;
 
     if ($? == -1) {
@@ -319,7 +319,7 @@ sub main {
 use constant _share_dir => do {
   my $path;
   $path = dist_share('App-RegexFileUtils');
-  die 'can not find share directory' unless $path && -d "$path/ppt";    
+  die 'can not find share directory' unless $path && -d "$path/ppt";
   $path;
 };
 

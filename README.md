@@ -30,14 +30,14 @@ Create symlinks to .so files so that the symlinks lack a version number
 
 # DESCRIPTION
 
-This distribution provides a version of `rm`, `cp`, `mv` and `ln` with a _re_ 
+This distribution provides a version of `rm`, `cp`, `mv` and `ln` with a _re_
 (as in regular expression) prefix where the file sources can be specified as a regular
-expression, or the file source and destination can be specified as a regular expression 
-substitution Perl style.  The functionality that this provides can be duplicated with 
-shell syntax (typically for loops), but I find these scripts require less typing and 
+expression, or the file source and destination can be specified as a regular expression
+substitution Perl style.  The functionality that this provides can be duplicated with
+shell syntax (typically for loops), but I find these scripts require less typing and
 work regardless of the shell you are using.
 
-The scripts in this distribution do not remove, copy, move or link files directly, 
+The scripts in this distribution do not remove, copy, move or link files directly,
 instead they call the real `rm`, `cp`, `mv` and `ln` programs provided by your
 operating system.  You can therefore use any options that they support, for example
 the `-i` option will allow you to interactively delete files:

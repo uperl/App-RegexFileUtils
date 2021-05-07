@@ -102,7 +102,7 @@ foreach my $file (@ARGV) {
     };
 }
 
-    
+
 exit $warnings;
 
 sub parse_time ($) {
@@ -222,10 +222,10 @@ except for the I<-f> option.
     $Log: touch,v $
     Revision 1.2  2004/08/05 14:17:44  cwest
     cleanup, new version number on website
-
+ 
     Revision 1.1  2004/07/23 20:10:18  cwest
     initial import
-
+ 
     Revision 1.1  1999/02/28 13:00:24  abigail
     Initial revision
 
