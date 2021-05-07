@@ -1,4 +1,4 @@
-# App::RegexFileUtils ![linux](https://github.com/plicease/App-RegexFileUtils/workflows/linux/badge.svg) ![macos](https://github.com/plicease/App-RegexFileUtils/workflows/macos/badge.svg)
+# App::RegexFileUtils ![linux](https://github.com/plicease/App-RegexFileUtils/workflows/linux/badge.svg) ![macos](https://github.com/plicease/App-RegexFileUtils/workflows/macos/badge.svg) ![windows](https://github.com/plicease/App-RegexFileUtils/workflows/windows/badge.svg) ![cygwin](https://github.com/plicease/App-RegexFileUtils/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/plicease/App-RegexFileUtils/workflows/msys2-mingw/badge.svg)
 
 use regexes with file utils like rm, cp, mv, ln
 
