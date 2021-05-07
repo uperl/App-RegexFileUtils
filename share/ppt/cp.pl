@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl -w
 ### do not edit next line. Set by CS-RCS... http://www.componentsoftware.com/csrcs/uhome.htm
-#REV=' @(#) $RCSfile: cp,v $ $Revision: 1.2 $ $Date: 2004/08/05 14:17:43 $ '; 
+#REV=' @(#) $RCSfile: cp,v $ $Revision: 1.2 $ $Date: 2004/08/05 14:17:43 $ ';
 require 5;
 use strict;
 use Cwd;
@@ -24,7 +24,7 @@ $main::opt_v = undef;  ## used and set by getopts() not standard, but may be hel
 #######   P R O C E S S   - O P T I O N S   ####################################
 my $VERBOSE = 0;
 my $PRESERVE = 0;
-unless (getopts("fipv")) 
+unless (getopts("fipv"))
 {
     &printUsage();
     exit 1;
@@ -42,8 +42,8 @@ $cp::EXIT_STATUS = 0; ## this means everything worked
 
 #######   O S   S T U F F   ####################################################
 $cp::USES_DRIVE_LETTER = 0;  ## the Windows 'C:\' type of thing...
-if ($^O =~ /Win32/i) 
-{ 
+if ($^O =~ /Win32/i)
+{
     $cp::USES_DRIVE_LETTER = 1;
 }
 
@@ -59,7 +59,7 @@ if ($^O =~ /(Win32|VMS|OS2)/i) ## OS is not case sensitive.. normalize path
     $cp::CASE_SENSITIVE = 0;
     $cp::CWD = uc $cp::CWD;
 }
-else              
+else
 {
     $cp::CASE_SENSITIVE = 1;
 }
@@ -83,7 +83,7 @@ foreach $path (@paths)
 {
     my $current_target = $target;
 
-    if (-d $target) 
+    if (-d $target)
     {
         my $base_path = basename($path);
         $current_target = "$target/$base_path";
@@ -119,7 +119,7 @@ exit $cp::EXIT_STATUS;
 ###  This is called via find() to copy directory trees (top down)
 sub findCopy
 {
-    $_ = uc $_ if (! $cp::CASE_SENSITIVE); 
+    $_ = uc $_ if (! $cp::CASE_SENSITIVE);
     my $dir_tail = cwd(); ## find() has "cd'ed" us here...
     $dir_tail = uc $dir_tail if (! $cp::CASE_SENSITIVE);
     $dir_tail =~ s|^$cp::PATH||;
