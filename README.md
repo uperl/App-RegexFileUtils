@@ -1,4 +1,4 @@
-# App::RegexFileUtils [![Build Status](https://secure.travis-ci.org/plicease/App-RegexFileUtils.png)](http://travis-ci.org/plicease/App-RegexFileUtils)
+# App::RegexFileUtils ![linux](https://github.com/plicease/App-RegexFileUtils/workflows/linux/badge.svg) ![macos](https://github.com/plicease/App-RegexFileUtils/workflows/macos/badge.svg)
 
 use regexes with file utils like rm, cp, mv, ln
 
@@ -6,19 +6,27 @@ use regexes with file utils like rm, cp, mv, ln
 
 Remove all files with a .bak extension:
 
-    % rerm '/\.bak$/'
+```
+% rerm '/\.bak$/'
+```
 
 Change the extension of all files from .jpeg or .JPG (any case) to .jpg
 
-    % remv '/\.jpe?g$/.jpg/i'
+```
+% remv '/\.jpe?g$/.jpg/i'
+```
 
 Copy all Perl files to a different directory:
 
-    % recp '/\.p[lm]$/' /perl/lib
+```
+% recp '/\.p[lm]$/' /perl/lib
+```
 
 Create symlinks to .so files so that the symlinks lack a version number
 
-    % reln -s '/\.so\..*$/.so/'
+```
+% reln -s '/\.so\..*$/.so/'
+```
 
 # DESCRIPTION
 
@@ -34,7 +42,9 @@ instead they call the real `rm`, `cp`, `mv` and `ln` programs provided by your
 operating system.  You can therefore use any options that they support, for example
 the `-i` option will allow you to interactively delete files:
 
-    % rerm -i '/\.bak$/'
+```
+% rerm -i '/\.bak$/'
+```
 
 # OPTIONS
 
@@ -60,12 +70,16 @@ These commands can also be invoked from your Perl script, using this module:
 
 ## main
 
-    App::RegexFileUtils->main( $program, @arguments )
+```
+App::RegexFileUtils->main( $program, @arguments )
+```
 
 For example:
 
-    use App::RegexFileUtils;
-    App::RegexFileUtils->main( 'rm', '/\.bak$/' );
+```perl
+use App::RegexFileUtils;
+App::RegexFileUtils->main( 'rm', '/\.bak$/' );
+```
 
 # CAVEATS
 
@@ -83,10 +97,12 @@ Directories with a training slash may be ambiguous with a regex, so
 if you want to use a path as a destination instead of a regex, be
 sure you do NOT include the trailing slash.  That is:
 
-    # use this:
-    % recp /^foo/ /usr/bin
-    # NOT this:
-    % recp /^foo/ /usr/bin/
+```perl
+# use this:
+% recp /^foo/ /usr/bin
+# NOT this:
+% recp /^foo/ /usr/bin/
+```
 
 # BUNDLED FILES
 
