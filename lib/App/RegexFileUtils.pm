@@ -271,7 +271,7 @@ sub main {
   my @files = @args;
 
   if(@files ==0) {
-    opendir(DIR, '.') || die "unable to opendir `.' $!";  ## no critic (Freenode::BarewordFilehandles)
+    opendir(DIR, '.') || die "unable to opendir `.' $!";  ## no critic (Community::BarewordFilehandles)
     @files = readdir(DIR);
     closedir DIR;
   }
